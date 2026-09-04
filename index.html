@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#08050f" />
+    <meta name="description" content="NORTE é o espaço particular do Ale para ouvir lo-fi, escrever, respirar e desacelerar." />
+    <title>NORTE — O espaço do Ale</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="site-intro playing" id="siteIntro" aria-label="Abrindo o NORTE">
+      <div class="intro-stars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="intro-mark"><span>N</span><b></b></div>
+      <p>SEU REFÚGIO ESTÁ ACENDENDO</p>
+      <h1>NORTE</h1>
+      <small>chuva na janela · luz baixa · tudo no seu tempo</small>
+      <div class="intro-progress" aria-hidden="true"><i></i></div>
+      <button id="skipIntro" type="button">entrar agora</button>
+    </div>
+    <img class="world-bg" src="./cozy-room-v3.webp" alt="Quarto aconchegante à noite com madeira escura, luz vinho, janela chuvosa e luar roxo" />
+    <div class="world-shade" aria-hidden="true"></div>
+    <div class="rain" id="rainLayer" aria-hidden="true"></div>
+    <div class="cursor-light" aria-hidden="true"></div>
+
+    <div class="app">
+      <aside class="sidebar" aria-label="Seções do NORTE">
+        <header class="side-head">
+          <div class="logo"><span>N</span></div>
+          <div><strong>NORTE</strong><small>ESPAÇO DO ALE</small></div>
+          <button class="side-collapse" id="sideCollapse" type="button" aria-label="Recolher menu">‹</button>
+        </header>
+
+        <p class="nav-label">MEU ESPAÇO</p>
+        <nav class="side-nav">
+          <button class="nav-item active" type="button" data-view="homeView">
+            <span class="nav-icon">✦</span><span class="nav-copy"><strong>Início</strong><small>Noite lo-fi</small></span><i></i>
+          </button>
+          <button class="nav-item" type="button" data-view="journalView">
+            <span class="nav-icon">✎</span><span class="nav-copy"><strong>Diário</strong><small>Tudo que ficou na cabeça</small></span><i></i>
+          </button>
+          <button class="nav-item" type="button" data-view="calmView">
+            <span class="nav-icon">◌</span><span class="nav-copy"><strong>Desacelerar</strong><small>Respiração e chuva</small></span><i></i>
+          </button>
+          <button class="nav-item" type="button" data-view="playView">
+            <span class="nav-icon">♢</span><span class="nav-copy"><strong>Passatempos</strong><small>Joguinhos sem pressão</small></span><i></i>
+          </button>
+          <button class="nav-item" type="button" data-view="memoriesView">
+            <span class="nav-icon">▣</span><span class="nav-copy"><strong>Memórias</strong><small>Prints, fotos e momentos</small></span><i></i>
+          </button>
+          <button class="nav-item" type="button" data-view="animeView">
+            <span class="nav-icon">☾</span><span class="nav-copy"><strong>Meus mundos</strong><small>Anime, mangá, jogos e música</small></span><i></i>
+          </button>
+          <button class="nav-item" type="button" data-view="northView">
+            <span class="nav-icon">↗</span><span class="nav-copy"><strong>Meu norte</strong><small>Pensar com clareza</small></span><i></i>
+          </button>
+        </nav>
+
+        <div class="side-bottom">
+          <div class="private-state"><span></span><div><strong>Espaço particular</strong><small>Salvo neste navegador</small></div></div>
+          <button class="performance-toggle" id="performanceToggle" type="button" aria-pressed="false"><i></i><span><strong>Modo leve</strong><small>Menos efeitos no PC</small></span></button>
+          <button class="replay-intro" id="replayIntro" type="button"><span>✦</span> Rever a entrada</button>
+          <p>Sem cobrança. Sem precisar fingir que está tudo resolvido.</p>
+        </div>
+      </aside>
+
+      <main class="stage" id="mainStage">
+        <header class="stage-head">
+          <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Abrir menu">☰</button>
+          <div class="view-identity"><span id="viewEyebrow">AGORA</span><strong id="viewName">Noite lo-fi</strong></div>
+          <div class="room-temperature"><i></i><span>refúgio aceso</span></div>
+          <div class="head-time"><time id="todayLabel">--</time><strong id="liveClock">--:--</strong></div>
+        </header>
+
+        <section class="view home-view active" id="homeView" aria-labelledby="homeTitle">
+          <div class="home-copy">
+            <p class="eyebrow">seu espaço</p>
+            <h1 id="homeTitle"><span id="greeting">Boa noite, Ale.</span></h1>
+            <p>Escolhe uma música e fica à vontade. Aqui tudo pode ir mais devagar.</p>
+            <button class="thought-button" id="nextThought" type="button"><span id="nightThought">O mundo pode esperar o tempo de uma música.</span><i>↻</i></button>
+            <div class="quick-portals" aria-label="Atalhos do seu espaço">
+              <button type="button" data-go-view="journalView"><span>✎</span> escrever</button>
+              <button type="button" data-go-view="calmView"><span>◌</span> respirar</button>
+              <button type="button" data-go-view="playView"><span>♢</span> jogar um pouco</button>
+              <button type="button" data-go-view="memoriesView"><span>▣</span> guardar momento</button>
+            </div>
+          </div>
+
+          <article class="lofi-player" aria-labelledby="trackTitle">
+            <div class="player-top">
+              <div><span class="signal"><i></i> LO-FI NO AR</span><h2 id="trackTitle">Lofi Girl — study radio</h2><p id="trackMeta">calma + foco · YouTube</p></div>
+              <a id="youtubeLink" href="https://www.youtube.com/watch?v=rFZHOHl-L8A" target="_blank" rel="noreferrer">abrir ↗</a>
+            </div>
+            <div class="video-box">
+              <iframe id="lofiPlayer" src="https://www.youtube-nocookie.com/embed/rFZHOHl-L8A?rel=0" title="Lofi Girl — study radio" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <div class="video-glow" aria-hidden="true"></div>
+            </div>
+            <div class="stations" aria-label="Estações lo-fi">
+              <button class="station active" type="button" data-video="rFZHOHl-L8A" data-title="Lofi Girl — study radio" data-meta="calma + foco · YouTube"><b>01</b><span><strong>Study radio</strong><small>calma + foco</small></span></button>
+              <button class="station" type="button" data-video="5yx6BWlEVcY" data-title="Chillhop Radio" data-meta="jazz + lo-fi · YouTube"><b>02</b><span><strong>Chillhop</strong><small>jazz + lo-fi</small></span></button>
+              <button class="station" type="button" data-video="4xDzrJKXOOY" data-title="Synthwave radio" data-meta="noite + neon · YouTube"><b>03</b><span><strong>Synthwave</strong><small>noite + neon</small></span></button>
+              <button class="station" type="button" data-video="lTRiuFIWV54" data-title="1 A.M Study Session" data-meta="estudo noturno · YouTube"><b>04</b><span><strong>1 A.M.</strong><small>estudo noturno</small></span></button>
+            </div>
+            <p class="no-autoplay">A música nunca começa sozinha. Você escolhe a hora do play.</p>
+          </article>
+
+          <button class="quiet-orbit" id="quietOrbit" type="button" aria-label="Criar um ponto de luz">
+            <span class="orbit-one"></span><span class="orbit-two"></span><span class="orbit-core">toque para<br />acender uma estrela</span>
+          </button>
+          <div class="made-stars" id="madeStars" aria-hidden="true"></div>
+
+          <div class="home-widgets">
+            <article class="daily-checkin home-glass">
+              <div class="mini-head"><span>COMO FOI O DIA?</span><small id="moodSaved">só você vê</small></div>
+              <div class="daily-moods" role="group" aria-label="Registrar como foi o dia">
+                <button type="button" data-day-mood="calmo"><b>◡</b><span>calmo</span></button>
+                <button type="button" data-day-mood="cansado"><b>–</b><span>cansado</span></button>
+                <button type="button" data-day-mood="cheio"><b>≈</b><span>cabeça cheia</span></button>
+                <button type="button" data-day-mood="bom"><b>✦</b><span>dia bom</span></button>
+              </div>
+              <div class="mood-week"><span>ÚLTIMOS DIAS</span><div id="moodWeek"></div></div>
+            </article>
+            <article class="joy-jar home-glass">
+              <div class="mini-head"><span>BAÚ DE COISAS BOAS</span><small id="joyCount">0 guardadas</small></div>
+              <p id="joyResult">Guarda um momento pequeno que você não quer esquecer.</p>
+              <div class="joy-entry"><input id="joyInput" type="text" maxlength="160" placeholder="Uma call, uma risada, uma conquista…" /><button id="saveJoy" type="button">guardar ✦</button></div>
+              <button class="random-joy" id="randomJoy" type="button">Puxar uma lembrança aleatória</button>
+            </article>
+          </div>
+        </section>
+
+        <section class="view journal-view" id="journalView" aria-labelledby="journalHeading" hidden>
+          <div class="view-intro compact"><p class="eyebrow">meu diário</p><h1 id="journalHeading">Escreve do seu jeito.</h1><p>Uma página de cada vez, salva somente neste navegador.</p></div>
+          <div class="journal-workspace">
+            <aside class="page-list">
+              <button class="new-page" id="newJournalPage" type="button"><span>＋</span> Nova página</button>
+              <label class="journal-search"><span>⌕</span><input id="journalSearch" type="search" placeholder="Buscar nas páginas…" /></label>
+              <p>PÁGINAS RECENTES</p>
+              <div id="journalPages" class="journal-pages"></div>
+            </aside>
+            <article class="journal-paper">
+              <div class="paper-top"><input id="journalTitle" type="text" maxlength="80" placeholder="Título desta página…" aria-label="Título da página" /><button id="favoriteJournal" type="button" aria-pressed="false" title="Marcar como importante">☆</button><time id="journalDate">--</time></div>
+              <div class="journal-assist">
+                <button id="journalPrompt" type="button">Não sei como começar ↻</button>
+                <div class="journal-mood" role="group" aria-label="Sentimento desta página"><button type="button" data-journal-mood="calmo">calmo</button><button type="button" data-journal-mood="confuso">confuso</button><button type="button" data-journal-mood="triste">triste</button><button type="button" data-journal-mood="feliz">feliz</button></div>
+              </div>
+              <textarea id="journalBody" maxlength="12000" placeholder="Escreve do seu jeito. Não precisa corrigir, explicar ou deixar bonito…" aria-label="Texto do diário"></textarea>
+              <footer class="paper-footer"><span id="journalStatus">Nova página</span><span><i id="journalWords">0 palavras</i> · <i id="journalCount">0 / 12000</i></span></footer>
+              <div class="journal-actions"><button class="ghost-button" id="exportJournal" type="button">Exportar diário</button><button class="danger-button" id="deleteJournal" type="button">Apagar página</button><button class="primary-button" id="saveJournal" type="button">Salvar página</button></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view calm-view" id="calmView" aria-labelledby="calmHeading" hidden>
+          <div class="view-intro compact"><p class="eyebrow">modo pausa</p><h1 id="calmHeading">Diminui o volume por um instante.</h1><p>Escolhe uma coisa. Um minuto já conta.</p></div>
+          <div class="calm-grid">
+            <article class="breath-card glass-card">
+              <div class="card-tag">01 · RESPIRAÇÃO</div>
+              <div class="breath-orb" id="breathOrb"><span id="breathCue">PRONTO</span><strong id="breathCount">60</strong><i></i></div>
+              <p id="breathInstruction">Inspire devagar e solte o ar sem pressa.</p>
+              <button class="primary-button" id="breathButton" type="button">Começar um minuto</button>
+            </article>
+            <article class="release-card glass-card">
+              <div class="card-tag">02 · SOLTAR UM PENSAMENTO</div>
+              <h2>Escreve e deixa ir.</h2>
+              <p>Não será salvo. A frase desaparece junto com a bolha.</p>
+              <div class="release-field" id="releaseField"><div class="release-empty">o espaço está livre</div></div>
+              <div class="release-input"><input id="releaseText" type="text" maxlength="120" placeholder="O que pode ficar para depois?" /><button id="releaseButton" type="button">soltar ↑</button></div>
+            </article>
+            <article class="rain-card glass-card">
+              <div class="card-tag">03 · AMBIENTE</div>
+              <h2>Chuva visual</h2><p>Ajuste o quanto a chuva aparece no seu quarto.</p>
+              <label for="rainRange"><span>quase silêncio</span><span>tempestade calma</span></label>
+              <input id="rainRange" type="range" min="0" max="100" value="48" />
+              <button class="ghost-button" id="dimButton" type="button" aria-pressed="false">Apagar um pouco as luzes</button>
+            </article>
+            <article class="timer-card glass-card">
+              <div class="card-tag">04 · MEU TEMPO</div>
+              <h2>Um intervalo do tamanho certo.</h2>
+              <p>Uma pausa curta, um bloco de foco ou só alguns minutos sem cobrança.</p>
+              <div class="timer-display"><strong id="restTimer">05:00</strong><span id="timerLabel">pausa curta</span></div>
+              <div class="timer-presets" role="group" aria-label="Escolher duração"><button class="active" type="button" data-timer-minutes="5">5 min</button><button type="button" data-timer-minutes="15">15 min</button><button type="button" data-timer-minutes="25">25 min</button></div>
+              <button class="primary-button" id="timerButton" type="button">Começar</button>
+            </article>
+            <article class="ground-card glass-card">
+              <div class="card-tag">05 · VOLTAR PARA AGORA</div>
+              <div class="ground-progress"><i id="groundProgress"></i></div>
+              <small id="groundStep">PASSO 1 DE 5</small>
+              <h2 id="groundTitle">Olha ao redor.</h2>
+              <p id="groundPrompt">Perceba cinco coisas que você consegue ver. Não precisa nomear todas depressa.</p>
+              <button class="ghost-button" id="groundNext" type="button">Próximo passo</button>
+            </article>
+          </div>
+        </section>
+
+        <section class="view play-view" id="playView" aria-labelledby="playHeading" hidden>
+          <div class="view-intro compact cozy-intro"><p class="eyebrow">passatempos</p><h1 id="playHeading">Um pouco de diversão, sem pressão.</h1><p>Três jogos simples, sem anúncios e sem ranking.</p></div>
+          <div class="play-grid">
+            <article class="memory-game lounge-card">
+              <header class="lounge-head"><div><span>01 · MEMÓRIA</span><h2>Pares da madrugada</h2></div><button id="resetMemoryGame" type="button">recomeçar ↻</button></header>
+              <p>Encontre os seis pares no seu tempo.</p>
+              <div class="memory-board" id="memoryBoard" aria-label="Jogo da memória"></div>
+              <footer><span id="memoryGameStatus">0 pares encontrados</span><small id="memoryMoves">0 movimentos</small></footer>
+            </article>
+
+            <article class="star-game lounge-card">
+              <header class="lounge-head"><div><span>02 · CONSTELAÇÃO</span><h2>Acende o céu</h2></div><b id="starTimer">30s</b></header>
+              <p>Toque nas luzes que aparecem. É só para desligar a cabeça um pouco.</p>
+              <div class="star-field" id="starField"><span id="starHint">quando quiser, começa</span><button id="gameStar" type="button" aria-label="Coletar estrela" hidden>✦</button></div>
+              <footer><button class="soft-button" id="startStarGame" type="button">Começar</button><span><strong id="starScore">0</strong> luzes</span></footer>
+            </article>
+
+            <article class="garden-game lounge-card">
+              <header class="lounge-head"><div><span>03 · JARDIM DE LUZ</span><h2>Desenha sem pensar</h2></div><button id="clearGarden" type="button">limpar</button></header>
+              <p>Arraste ou toque nos quadradinhos para acender seu jardim. Ele fica salvo.</p>
+              <div class="garden-palette" role="group" aria-label="Cor do jardim"><button class="active" type="button" data-garden-color="violet" aria-label="Roxo"></button><button type="button" data-garden-color="wine" aria-label="Vermelho vinho"></button><button type="button" data-garden-color="moon" aria-label="Luz da lua"></button><button type="button" data-garden-color="leaf" aria-label="Verde folha"></button><button type="button" data-garden-color="off" aria-label="Apagar"></button></div>
+              <div class="light-garden" id="lightGarden" aria-label="Jardim de luz desenhável"></div>
+              <footer><span>seu desenho fica só neste navegador</span></footer>
+            </article>
+          </div>
+        </section>
+
+        <section class="view memories-view" id="memoriesView" aria-labelledby="memoriesHeading" hidden>
+          <div class="memories-top">
+            <div class="view-intro compact cozy-intro"><p class="eyebrow">memórias</p><h1 id="memoriesHeading">Momentos que você quis guardar.</h1><p>Prints e fotos salvos neste dispositivo.</p></div>
+            <label class="memory-upload" id="memoryDropZone" for="memoryUpload"><input id="memoryUpload" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple /><span>＋</span><strong>Adicionar momentos</strong><small>Escolher fotos ou arrastar aqui</small></label>
+          </div>
+
+          <div class="memory-toolbar">
+            <label><span>⌕</span><input id="memorySearch" type="search" placeholder="Buscar pela legenda…" /></label>
+            <div role="group" aria-label="Filtrar memórias"><button class="active" type="button" data-memory-filter="all">todas</button><button type="button" data-memory-filter="favorite">favoritas</button></div>
+            <span id="memoryStorage">0 momentos guardados</span>
+          </div>
+          <p class="memory-status" id="memoryStatus" aria-live="polite">Seu baú está pronto.</p>
+          <div class="memory-gallery" id="memoryGallery"></div>
+
+          <div class="memory-bottom">
+            <article class="backup-card lounge-card">
+              <div><span>COFRE DO NORTE</span><h2>Leve seu cantinho com você.</h2><p>O backup reúne diário, lembranças, listas, configurações e fotos. Ele é o que permitirá mudar para a hospedagem gratuita sem perder tudo.</p></div>
+              <div><button class="soft-button" id="exportNorteBackup" type="button">Baixar backup completo</button><label class="import-backup" for="importNorteBackup">Restaurar backup<input id="importNorteBackup" type="file" accept="application/json,.json" /></label></div>
+            </article>
+            <article class="privacy-card"><span>⌂</span><div><strong>Privado de verdade no aparelho</strong><p>As fotos não são enviadas para uma galeria pública. Se o navegador for limpo ou você trocar de aparelho, use o backup para recuperar.</p></div></article>
+          </div>
+        </section>
+
+        <section class="view anime-view" id="animeView" aria-labelledby="animeHeading" hidden>
+          <div class="view-intro compact"><p class="eyebrow">seus universos</p><h1 id="animeHeading">Histórias e mundos para entrar.</h1><p>Anime, mangá, jogos e música para cada clima.</p></div>
+          <article class="world-banner">
+            <img src="./worlds-river-v1.webp" alt="Cidade tranquila à beira de um rio sob um céu roxo com um cometa" />
+            <div><span>UM MUNDO PARA CADA NOITE</span><h2>Entre uma rua calma, um jogo e uma boa história.</h2><p>Esta paisagem é só sua: original, sem copiar personagens ou cenas de anime.</p></div>
+          </article>
+          <nav class="world-tabs" aria-label="Seções de Meus mundos"><button class="active" type="button" data-world-tab="animePanel">Minha estante</button><button type="button" data-world-tab="gamesPanel">Jogos</button><button type="button" data-world-tab="listsPanel">Música & listas</button></nav>
+
+          <div class="world-panel active" id="animePanel">
+            <header class="anime-library-head">
+              <div><h2>Minha estante de anime</h2><p>Um lugar bonito para guardar tudo que você já assistiu.</p></div>
+              <label class="anime-library-search"><span>⌕</span><input id="animeLibrarySearch" type="search" placeholder="Buscar na estante…" /></label>
+              <strong id="animeLibraryCount">0 animes</strong>
+            </header>
+            <div class="anime-library-layout">
+              <form class="anime-add-card" id="animeForm">
+                <label class="anime-cover-picker" for="animeCoverInput">
+                  <input id="animeCoverInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif" />
+                  <img id="animeCoverPreviewImage" alt="Prévia da capa escolhida" hidden />
+                  <span id="animeCoverPlaceholder"><b>＋</b><strong>Escolher capa</strong><small>JPG, PNG, WEBP ou GIF</small></span>
+                  <i>trocar capa</i>
+                </label>
+                <div class="anime-form-fields">
+                  <div><span>Adicionar à estante</span><h3>Qual anime você terminou?</h3></div>
+                  <label>Nome do anime<input id="animeName" type="text" maxlength="100" placeholder="Ex.: Takagi-san" required /></label>
+                  <label>Uma lembrança <small>opcional</small><textarea id="animeNote" maxlength="280" placeholder="O que você mais gostou nele?"></textarea></label>
+                  <button class="primary-button" type="submit">Guardar anime</button>
+                  <p id="animeFormStatus" aria-live="polite">A capa e as informações ficam neste navegador.</p>
+                </div>
+              </form>
+              <div class="anime-library-grid" id="animeLibraryGrid"></div>
+            </div>
+          </div>
+
+          <div class="world-panel" id="gamesPanel" hidden>
+            <div class="panel-heading"><div><span>ESCOLHE MEU CLIMA</span><h2>Que mundo combina com hoje?</h2></div><button class="primary-button" id="pickGame" type="button">Sortear um mundo</button></div>
+            <p class="game-pick" id="gamePick">Talvez construir sem pressa. Talvez explorar. Talvez só passear.</p>
+            <div class="game-grid">
+              <article class="game-card game-roblox"><i>◈</i><small>CRIAR & DESCOBRIR</small><h3>Roblox</h3><p>Uma noite para experimentar mundos diferentes.</p></article>
+              <article class="game-card game-minecraft"><i>▦</i><small>CONSTRUIR</small><h3>Minecraft</h3><p>Colocar bloco por bloco até a cabeça ficar mais quieta.</p></article>
+              <article class="game-card game-terraria"><i>✣</i><small>EXPLORAR</small><h3>Terraria</h3><p>Uma aventura pequena que sempre vira uma história.</p></article>
+              <article class="game-card game-palworld"><i>◇</i><small>AVENTURA</small><h3>Palworld</h3><p>Explorar, montar um canto e cuidar do seu mundo.</p></article>
+              <article class="game-card game-honkai"><i>✦</i><small>ESPAÇO & HISTÓRIA</small><h3>Honkai: Star Rail</h3><p>Personagens, paisagens e uma viagem longa pelas estrelas.</p></article>
+              <article class="game-card game-reddead"><i>⌁</i><small>MUNDO ABERTO</small><h3>Red Dead Redemption 2</h3><p>Cavalgar sem pressa e deixar o cenário contar a noite.</p></article>
+            </div>
+          </div>
+
+          <div class="world-panel" id="listsPanel" hidden>
+            <div class="lists-grid">
+              <article class="vibe-card glass-card">
+                <div class="card-tag">TRILHA DA NOITE</div><h2>Qual é o som de agora?</h2><p>Escolhe uma sensação. A música continua sendo sua decisão — nada toca sozinho.</p>
+                <div class="vibe-buttons"><button type="button" data-vibe="lofi">lo-fi aconchegante</button><button type="button" data-vibe="melancolico">melancólico brasileiro</button><button type="button" data-vibe="foco">foco noturno</button><button type="button" data-vibe="noite">neon na madrugada</button></div>
+                <div class="vibe-result" id="vibeResult">Escolhe uma vibe e eu preparo o caminho até o player.</div>
+              </article>
+              <article class="reading-card glass-card">
+                <div class="card-tag">MINHA ESTANTE</div><h2>Para ver ou ler depois.</h2><p>Anime, mangá, jogo, filme — escreve do seu jeito.</p>
+                <div class="title-entry"><input id="titleInput" type="text" maxlength="100" placeholder="Adicionar um título…" /><button id="addTitle" type="button">＋</button></div>
+                <div class="title-list" id="titleList"></div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="view north-view" id="northView" aria-labelledby="northHeading" hidden>
+          <div class="view-intro compact"><p class="eyebrow">seu caminho</p><h1 id="northHeading">O que importa agora.</h1><p>Não precisa resolver tudo. Encontra apenas o próximo passo.</p></div>
+          <article class="north-banner">
+            <img src="./north-dawn-v1.webp" alt="Mesa calma ao amanhecer com livro de anatomia, estetoscópio e materiais de design" />
+            <div><span>O FUTURO NÃO PRECISA CHEGAR TODO HOJE</span><h2>De Minas para o caminho que você está construindo.</h2><p>Você já terminou etapas importantes. Agora é tempo de esperar o resultado e continuar inteiro.</p><div><b>ENCCEJA · AGUARDANDO</b><b>ENFERMAGEM</b><b>DESIGN GRÁFICO</b></div></div>
+          </article>
+          <div class="north-grid">
+            <article class="clarity-tool glass-card">
+              <div class="card-tag">FATO × PREVISÃO</div>
+              <label><span>O que aconteceu de verdade?</span><small>Algo que você consegue confirmar.</small><textarea id="factText" maxlength="1200" placeholder="Escreva só o que você sabe…"></textarea></label>
+              <label><span>O que sua cabeça está prevendo?</span><small>Uma possibilidade ainda não confirmada.</small><textarea id="fearText" maxlength="1200" placeholder="Escreva o medo ou a suposição…"></textarea></label>
+              <button class="primary-button" id="organizeButton" type="button">Organizar pensamento</button>
+              <p class="clarity-answer" id="clarityAnswer" aria-live="polite">Primeiro separa. Depois decide.</p>
+            </article>
+            <div class="north-side">
+              <article class="path-card glass-card">
+                <div class="card-tag">CAMINHO</div>
+                <div class="step active"><span>01</span><div><small>PROVA CONCLUÍDA</small><strong>ENCCEJA</strong><p>Aguardando o resultado.</p></div></div>
+                <div class="step"><span>02</span><div><small>PRÓXIMA DIREÇÃO</small><strong>ENFERMAGEM</strong><p>Um objetivo construído sem precisar correr.</p></div></div>
+                <div class="step"><span>03</span><div><small>O QUE JÁ É SEU</small><strong>DESIGN + COMUNICAÇÃO</strong><p>Habilidades que continuam com você.</p></div></div>
+              </article>
+              <article class="focus-card glass-card"><div class="card-tag">UMA COISA DE CADA VEZ</div><label for="mainFocus">O que realmente importa agora?</label><div><input id="mainFocus" type="text" maxlength="120" placeholder="Meu próximo passo é…" /><span id="focusStatus">privado</span></div></article>
+            </div>
+          </div>
+          <div class="north-lower">
+            <article class="strength-card glass-card">
+              <div class="card-tag">COISAS QUE JÁ SÃO SUAS</div><h2>Provas de que você não começa do zero.</h2>
+              <ul><li><i>✎</i><span><strong>Escrita e argumentação</strong><small>Você sabe organizar ideias e dar voz ao que pensa.</small></span></li><li><i>◇</i><span><strong>Design gráfico concluído</strong><small>Olhar visual também é uma habilidade de verdade.</small></span></li><li><i>↗</i><span><strong>Coragem de voltar a estudar</strong><small>Você fez a prova; isso já é movimento.</small></span></li><li><i>＋</i><span><strong>Cuidado com as pessoas</strong><small>Uma direção que combina com Enfermagem.</small></span></li></ul>
+            </article>
+            <article class="steps-card glass-card">
+              <div class="card-tag">PRÓXIMOS PASSOS REAIS</div><h2>Pequeno o bastante para acontecer.</h2><p>Edite e marque só o que fizer sentido agora.</p>
+              <div class="north-tasks" id="northTasks"><label><input type="checkbox" data-north-task-check="0" /><i></i><input type="text" maxlength="100" data-north-task-text="0" value="Acompanhar o resultado do ENCCEJA sem olhar toda hora" /></label><label><input type="checkbox" data-north-task-check="1" /><i></i><input type="text" maxlength="100" data-north-task-text="1" value="Pesquisar um caminho possível para Enfermagem" /></label><label><input type="checkbox" data-north-task-check="2" /><i></i><input type="text" maxlength="100" data-north-task-text="2" value="Separar um tempo para escrever ou criar algo" /></label></div>
+              <div class="task-progress"><i id="northProgress"></i><span id="northProgressLabel">0 de 3</span></div>
+            </article>
+            <article class="future-card glass-card">
+              <div class="card-tag">PARA O ALE DEPOIS DO RESULTADO</div><h2>Uma carta sem data para vencer.</h2><p>Escreva algo que você vai querer lembrar quando essa espera acabar.</p>
+              <textarea id="futureLetter" maxlength="4000" placeholder="Quando eu abrir isso de novo, quero lembrar que…"></textarea><small id="futureStatus">privado e salvo neste navegador</small>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="deleteDialog" class="confirm-dialog">
+      <p>APAGAR PÁGINA</p><h2>Tem certeza?</h2><span>Essa página está salva somente neste navegador e não poderá ser recuperada.</span>
+      <div><button class="ghost-button" id="cancelDelete" type="button">Cancelar</button><button class="danger-button solid" id="confirmDelete" type="button">Apagar</button></div>
+    </dialog>
+
+    <dialog id="photoDialog" class="photo-dialog">
+      <button class="photo-close" id="closePhotoDialog" type="button" aria-label="Fechar foto">×</button>
+      <img id="photoDialogImage" alt="Memória ampliada" />
+      <div><span id="photoDialogDate">--</span><strong id="photoDialogCaption">Momento guardado</strong></div>
+      <footer><button class="ghost-button" id="downloadPhoto" type="button">Baixar imagem</button><button class="danger-button" id="deletePhoto" type="button">Apagar do baú</button></footer>
+    </dialog>
+
+    <div class="norte-toast" id="norteToast" role="status" aria-live="polite"></div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
