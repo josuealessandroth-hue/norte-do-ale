@@ -1,7 +1,7 @@
-# NORTE
+# Meu Cantinho
 
-Um cantinho pessoal, calmo e aconchegante — com lofi, diário, memórias, animes, jogos e piano.
+Um pequeno refúgio digital aconchegante e interativo, com aquário, jardim, lareira, chuva, biblioteca, diário, música, memórias, sons ambientes e modo foco.
 
-🌙 [Abrir o NORTE](https://josuealessandroth-hue.github.io/norte-do-ale/)
+🌙 [Abrir o Meu Cantinho](https://josuealessandroth-hue.github.io/norte-do-ale/)
 
-> As anotações, fotos e demais dados pessoais ficam somente no navegador de quem usa o site; eles não são enviados ao GitHub.
+> As anotações, fotos e capas adicionadas ficam somente no navegador de quem usa o site. Esses dados pessoais não são enviados ao GitHub.

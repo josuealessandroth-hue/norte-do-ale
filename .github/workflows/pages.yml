@@ -1,4 +1,4 @@
-name: Publicar NORTE
+name: Publicar Meu Cantinho
 
 on:
   push:
@@ -27,7 +27,7 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Preparar site
+      - name: Empacotar site
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
